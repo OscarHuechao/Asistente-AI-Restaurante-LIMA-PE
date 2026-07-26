@@ -1,8 +1,10 @@
 .env
 chroma_db/
+.tessdata/
 __pycache__/
 *.pyc
 .venv/
 venv/
 .DS_Store
+~$*
 
