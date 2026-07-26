@@ -68,3 +68,8 @@ requirements.txt
 .env.example
 README.md
 ```
+
+## Deploy
+La Aplicación está desplegada:
+URL 
+Proyecto desarrollado por Oscar Huechao, para el Challenge Final Alura Agente
