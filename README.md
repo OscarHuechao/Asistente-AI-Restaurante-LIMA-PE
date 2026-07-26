@@ -71,5 +71,5 @@ README.md
 
 ## Deploy
 La Aplicación está desplegada:
-URL 
+URL http://192.168.8.114:8501
 Proyecto desarrollado por Oscar Huechao, para el Challenge Final Alura Agente
