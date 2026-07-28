@@ -16,9 +16,9 @@ from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv(override=True)
 
-CHROMA_DIR = "chroma_db"
-DEFAULT_MODEL = os.getenv("GOOGLE_GENAI_MODEL", "gemini-flash-latest")
-FALLBACK_MODEL = os.getenv("GOOGLE_GENAI_FALLBACK_MODEL", "gemini-flash-latest")
+CHROMA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "chroma_db"))
+DEFAULT_MODEL = os.getenv("GOOGLE_GENAI_MODEL", "gemini-2.0-flash")
+FALLBACK_MODEL = os.getenv("GOOGLE_GENAI_FALLBACK_MODEL", "gemini-2.0-flash")
 
 PROMPT_TEMPLATE = """Eres un asistente que responde preguntas ÚNICAMENTE con base en el
 siguiente contexto extraído de un documento interno. Si la respuesta no está

@@ -86,7 +86,7 @@ def main():
     if not os.path.exists(CHROMA_DIR):
         with st.spinner("Generando la base vectorial a partir de los PDFs..."):
             try:
-                ingest_pdf([os.path.join(DATA_DIR, pdf) for pdf in pdfs], force_ocr=True)
+                ingest_pdf([os.path.join(DATA_DIR, pdf) for pdf in pdfs], force_ocr=False)
             except Exception as exc:
                 st.error("No se pudo generar la base vectorial inicial.")
                 st.error(str(exc))

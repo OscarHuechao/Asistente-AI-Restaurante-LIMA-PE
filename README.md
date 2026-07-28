@@ -70,9 +70,15 @@ README.md
 ```
 
 ## Deploy
-La Aplicación está desplegada:
-URL http://192.168.8.114:8501
+La aplicación se puede ver en la web mediante un despliegue de Streamlit.
 
-https://github.com/OscarHuechao/Asistente-AI-Restaurante-LIMA-PE.git
+Pasos recomendados:
+1. Sube este repositorio a GitHub.
+2. Abre Streamlit Community Cloud.
+3. Conecta el repositorio y selecciona el archivo principal [app.py](app.py).
+4. Agrega la variable secreta `GOOGLE_API_KEY` en los secretos del despliegue.
+5. Inicia el deploy y usa la URL pública que te genere Streamlit.
+
+Nota: la URL `http://192.168.8.114:8501` solo funciona de forma local.
 
 Proyecto desarrollado por Oscar Huechao, para el Challenge Final Alura Agente

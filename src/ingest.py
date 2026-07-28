@@ -25,7 +25,7 @@ from langchain.schema import Document
 
 load_dotenv()
 
-CHROMA_DIR = "chroma_db"
+CHROMA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "chroma_db"))
 
 
 def pdf_requires_ocr(docs):
@@ -155,13 +155,19 @@ def ingest_pdf(pdf_path, force_ocr=False):
     documents = []
     for path in pdf_paths:
         print(f"📄 Cargando PDF: {path}")
-        if force_ocr:
-            docs = ocr_pdf(path)
-        else:
+        try:
+            if force_ocr:
+                docs = ocr_pdf(path)
+            else:
+                loader = PyPDFLoader(path)
+                docs = loader.load()
+                if pdf_requires_ocr(docs):
+                    docs = ocr_pdf(path)
+        except Exception as exc:
+            print(f"⚠️  No se pudo usar OCR en {path}: {exc}")
+            print("⚠️  Usando extracción simple de texto del PDF.")
             loader = PyPDFLoader(path)
             docs = loader.load()
-            if pdf_requires_ocr(docs):
-                docs = ocr_pdf(path)
         print(f"   -> {len(docs)} páginas cargadas")
         documents.extend(docs)
 
@@ -179,7 +185,8 @@ def ingest_pdf(pdf_path, force_ocr=False):
 
     # Si ya existe una base previa, la eliminamos para reconstruirla limpia
     if os.path.exists(CHROMA_DIR):
-        shutil.rmtree(CHROMA_DIR)
+        shutil.rmtree(CHROMA_DIR, ignore_errors=True)
+    os.makedirs(CHROMA_DIR, exist_ok=True)
 
     vectorstore = Chroma.from_documents(
         documents=chunks,
